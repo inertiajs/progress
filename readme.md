@@ -1,6 +1,6 @@
 # Inertia.js Progress
 
-This package adds an NProgress page loading indicator to your Inertia.js app.
+This package adds an [NProgress](https://ricostacruz.com/nprogress/) page loading indicator to your Inertia.js app.
 
 ## Installation
 
