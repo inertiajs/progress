@@ -2,17 +2,18 @@ import Nprogress from 'nprogress'
 
 export default {
   delay: null,
-  color: null,
   timeout: null,
   inProgress: false,
 
-  init({ delay = 250, color = '#29d', showSpinner = false } = {}) {
+  init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false } = {}) {
     this.delay = delay
-    this.color = color
 
     this.configureNProgress({ showSpinner })
     this.registerEvents()
-    this.injectCSS()
+
+    if (includeCSS) {
+      this.injectCSS(color)
+    }
   },
 
   configureNProgress(config) {
@@ -25,7 +26,7 @@ export default {
     document.addEventListener('inertia:finish', this.finish.bind(this))
   },
 
-  injectCSS() {
+  injectCSS(color) {
     const element = document.createElement('style')
     element.type = 'text/css'
     element.textContent = `
@@ -34,7 +35,7 @@ export default {
       }
 
       #nprogress .bar {
-        background: ${this.color};
+        background: ${color};
 
         position: fixed;
         z-index: 1031;
@@ -51,7 +52,7 @@ export default {
         right: 0px;
         width: 100px;
         height: 100%;
-        box-shadow: 0 0 10px ${this.color}, 0 0 5px ${this.color};
+        box-shadow: 0 0 10px ${color}, 0 0 5px ${color};
         opacity: 1.0;
 
         -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -73,8 +74,8 @@ export default {
         box-sizing: border-box;
 
         border: solid 2px transparent;
-        border-top-color: ${this.color};
-        border-left-color: ${this.color};
+        border-top-color: ${color};
+        border-left-color: ${color};
         border-radius: 50%;
 
         -webkit-animation: nprogress-spinner 400ms linear infinite;
