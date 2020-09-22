@@ -7,9 +7,16 @@ export default {
   init({ delay = 250, showSpinner = false } = {}) {
     this.delay = delay
 
+    this.configureNProgress({ showSpinner })
+    this.registerEvents()
     this.injectCSS()
-    Nprogress.configure({ showSpinner: showSpinner })
+  },
 
+  configureNProgress(config) {
+    Nprogress.configure(config)
+  },
+
+  registerEvents() {
     document.addEventListener('inertia:start', this.start.bind(this))
     document.addEventListener('inertia:progress', this.progress.bind(this))
     document.addEventListener('inertia:finish', this.finish.bind(this))
