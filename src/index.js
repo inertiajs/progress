@@ -4,6 +4,7 @@ export default {
   delay: null,
   color: null,
   timeout: null,
+  inProgress: false,
 
   init({ delay = 250, color = '#29d', showSpinner = false } = {}) {
     this.delay = delay
@@ -105,19 +106,24 @@ export default {
   start() {
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
+      this.inProgress = true
       Nprogress.set(0)
       Nprogress.start()
     }, this.delay)
   },
 
   progress(event) {
-    if (event.detail.progress.percentage) {
+    if (this.inProgress && event.detail.progress.percentage) {
       Nprogress.set(event.detail.progress.percentage / 100 * .9)
     }
   },
 
   finish() {
     clearTimeout(this.timeout)
-    Nprogress.done()
+
+    if (this.inProgress) {
+      Nprogress.done()
+      this.inProgress = false
+    }
   },
 }
