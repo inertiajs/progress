@@ -15,7 +15,12 @@ Once it's been installed, initialize it in your app:
 import Progress from '@inertiajs/progress'
 
 Progress.init({
+  // The delay after which the progress bar will appear during navigation, in milliseconds.
+  // The progress bar appears after 250ms by default.
   delay: 250,
+
+  // Sets whether the NProgress spinner will be shown.
+  // Defaults to false.
   showSpinner: false,
 })
 ```
