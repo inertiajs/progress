@@ -12,9 +12,9 @@ yarn add @inertiajs/progress
 Once it's been installed, initialize it in your app:
 
 ```js
-import Progress from '@inertiajs/progress'
+import { InertiaProgress } from '@inertiajs/progress'
 
-Progress.init({
+InertiaProgress.init({
   // The delay after which the progress bar will
   // appear during navigation, in milliseconds.
   delay: 250,
