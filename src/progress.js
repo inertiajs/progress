@@ -114,7 +114,7 @@ export default {
   },
 
   progress(event) {
-    if (this.inProgress && event.detail.progress.percentage) {
+    if (Nprogress.isStarted() && event.detail.progress.percentage) {
       Nprogress.set(event.detail.progress.percentage / 100 * .9)
     }
   },
