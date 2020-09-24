@@ -104,13 +104,19 @@ export default {
     document.head.appendChild(element)
   },
 
-  start() {
-    this.inProgress++
-    clearTimeout(this.timeout)
-    this.timeout = setTimeout(() => {
-      Nprogress.set(0)
-      Nprogress.start()
-    }, this.delay)
+  start(event) {
+    Promise.resolve().then(() => {
+      if (event.defaultPrevented) {
+        return
+      }
+
+      this.inProgress++
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        Nprogress.set(0)
+        Nprogress.start()
+      }, this.delay)
+    })
   },
 
   progress(event) {
