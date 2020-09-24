@@ -1,6 +1,6 @@
 {
   "name": "@inertiajs/progress",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "description": "This package adds an NProgress page loading indicator to your Inertia.js app.",
   "contributors": [
