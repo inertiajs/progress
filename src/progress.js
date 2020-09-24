@@ -3,7 +3,7 @@ import Nprogress from 'nprogress'
 export default {
   delay: null,
   timeout: null,
-  inProgress: false,
+  inProgress: 0,
 
   init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false } = {}) {
     this.delay = delay
@@ -105,9 +105,9 @@ export default {
   },
 
   start() {
+    this.inProgress++
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
-      this.inProgress = true
       Nprogress.set(0)
       Nprogress.start()
     }, this.delay)
@@ -120,11 +120,10 @@ export default {
   },
 
   finish() {
-    clearTimeout(this.timeout)
-
-    if (this.inProgress) {
+    this.inProgress--
+    if (this.inProgress === 0) {
       Nprogress.done()
-      this.inProgress = false
+      clearTimeout(this.timeout)
     }
   },
 }
