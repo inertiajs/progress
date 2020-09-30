@@ -1,4 +1,5 @@
 import Nprogress from 'nprogress'
+import { enqueueJob } from './utils'
 
 export default {
   delay: null,
@@ -105,7 +106,7 @@ export default {
   },
 
   start(event) {
-    Promise.resolve().then(() => {
+    enqueueJob(() => {
       if (event.defaultPrevented) {
         return
       }
