@@ -1,5 +1,5 @@
 export function enqueueJob(callback) {
-  if (typeof queueMicrotask !== 'undefined' && /native code/.test(queueMicrotask.toString())) {
+  if (typeof queueMicrotask === 'function') {
     return queueMicrotask(callback)
   }
 
