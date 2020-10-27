@@ -26,9 +26,9 @@ function progress(event) {
 function finish(event) {
   clearTimeout(timeout)
   if (NProgress.isStarted()) {
-    if (event.detail.finish.type === 'done') {
+    if (event.detail.finish.type === 'completed') {
       NProgress.done()
-    } else if (event.detail.finish.type === 'replaced') {
+    } else if (event.detail.finish.type === 'interrupted') {
       NProgress.set(0)
     } else if (event.detail.finish.type === 'cancelled') {
       NProgress.done()
