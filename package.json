@@ -22,5 +22,8 @@
   },
   "dependencies": {
     "nprogress": "^0.2.0"
+  },
+  "peerDependencies": {
+    "@inertiajs/inertia": "^0.6.0"
   }
 }
