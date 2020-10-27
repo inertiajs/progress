@@ -26,11 +26,11 @@ function progress(event) {
 function finish(event) {
   clearTimeout(timeout)
   if (NProgress.isStarted()) {
-    if (event.detail.finish.type === 'completed') {
+    if (event.detail.visit.completed) {
       NProgress.done()
-    } else if (event.detail.finish.type === 'interrupted') {
+    } else if (event.detail.visit.interrupted) {
       NProgress.set(0)
-    } else if (event.detail.finish.type === 'cancelled') {
+    } else if (event.detail.visit.cancelled) {
       NProgress.done()
       NProgress.remove()
     }
