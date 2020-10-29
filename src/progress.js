@@ -9,12 +9,7 @@ function addEventListeners(delay) {
 }
 
 function start(delay) {
-  clearTimeout(timeout)
-  timeout = setTimeout(() => {
-    if (!NProgress.isStarted()) {
-      NProgress.start()
-    }
-  }, delay)
+  timeout = setTimeout(() => NProgress.start(), delay)
 }
 
 function progress(event) {
