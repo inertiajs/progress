@@ -14,7 +14,7 @@ function start(delay) {
 
 function progress(event) {
   if (NProgress.isStarted() && event.detail.progress.percentage) {
-    NProgress.set(event.detail.progress.percentage / 100 * .9)
+    NProgress.set(Math.max(NProgress.status, event.detail.progress.percentage / 100 * 0.9))
   }
 }
 
