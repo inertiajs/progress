@@ -25,15 +25,15 @@ function progress(event) {
 
 function finish(event) {
   clearTimeout(timeout)
-  if (NProgress.isStarted()) {
-    if (event.detail.visit.completed) {
-      NProgress.done()
-    } else if (event.detail.visit.interrupted) {
-      NProgress.set(0)
-    } else if (event.detail.visit.cancelled) {
-      NProgress.done()
-      NProgress.remove()
-    }
+  if (!NProgress.isStarted()) {
+    return
+  } else if (event.detail.visit.completed) {
+    NProgress.done()
+  } else if (event.detail.visit.interrupted) {
+    NProgress.set(0)
+  } else if (event.detail.visit.cancelled) {
+    NProgress.done()
+    NProgress.remove()
   }
 }
 
