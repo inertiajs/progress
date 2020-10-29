@@ -9,6 +9,7 @@
   "source": "src/index.js",
   "main": "dist/index.js",
   "unpkg": "dist/index.umd.js",
+  "types": "types.d.ts",
   "scripts": {
     "build": "npm run build:cjs && npm run build:umd",
     "build:cjs": "microbundle --format cjs",
