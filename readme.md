@@ -27,5 +27,8 @@ InertiaProgress.init({
 
   // Whether the NProgress spinner will be shown.
   showSpinner: false,
+
+  // Specify this to change the parent container. (default: body)
+  parent: 'body',
 })
 ```
