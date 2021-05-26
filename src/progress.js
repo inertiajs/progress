@@ -111,9 +111,13 @@ function injectCSS(color) {
 }
 
 const Progress = {
-  init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false } = {}) {
+  init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false, parent = 'body' } = {}) {
     addEventListeners(delay)
-    NProgress.configure({ showSpinner })
+    NProgress.configure({ 
+      showSpinner,
+      parent
+    })
+
     if (includeCSS) {
       injectCSS(color)
     }

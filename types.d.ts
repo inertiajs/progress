@@ -30,6 +30,13 @@ interface ProgressSettings {
 	 * Defaults to false.
 	 */
 	showSpinner?: boolean;
+
+	/**
+	 * Change the parent DOM container.
+	 * 
+	 * Defaults to body
+	 */
+	parent?: string
 }
 
 /**
