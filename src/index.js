@@ -1,1 +1,1 @@
-export { default as InertiaProgress } from './progress'
+export { default as InertiaProgress, initializeProgress } from './progress'
