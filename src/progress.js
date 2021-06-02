@@ -121,3 +121,6 @@ const Progress = {
 }
 
 export default Progress
+export function initializeProgress(settings = {}) {
+	Progress.init(settings)
+}

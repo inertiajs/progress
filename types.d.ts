@@ -44,3 +44,10 @@ export const InertiaProgress: {
 	 */
 	init(settings?: ProgressSettings): void;
 };
+
+/**
+ * Initializes the progress.
+	 *
+	 * @param settings Optional settings.
+ */
+export function initializeProgress(settings?: ProgressSettings): void
