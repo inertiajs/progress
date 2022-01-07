@@ -11,9 +11,10 @@
   "unpkg": "dist/index.umd.js",
   "types": "types.d.ts",
   "scripts": {
-    "build": "npm run build:cjs && npm run build:umd",
+    "build": "npm run clean && npm run build:cjs && npm run build:umd",
     "build:cjs": "microbundle --format cjs",
     "build:umd": "microbundle --format umd --name Inertia --external none",
+    "clean": "rm -rf dist",
     "prepublishOnly": "npm run build",
     "watch": "microbundle watch --format cjs"
   },

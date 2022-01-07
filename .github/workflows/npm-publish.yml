@@ -1,0 +1,27 @@
+name: Publish Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          git config --global user.name "Inertia.js Publisher (BOT)"
+          git config --global user.email "97295307+inertiajs-publisher@users.noreply.github.com"
+      - run: npm install
+      - run: |
+          git tag -d ${{ github.event.release.tag_name }} || true
+          npm version ${{ github.event.release.tag_name }} -m "Tag @inertiajs/progress ${{ github.event.release.tag_name }}"
+          git push origin HEAD:master
+          git push --force origin refs/tags/${{ github.event.release.tag_name }}:refs/tags/${{ github.event.release.tag_name }}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
