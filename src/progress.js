@@ -32,7 +32,7 @@ function finish(event) {
   }
 }
 
-function injectCSS(color) {
+function injectCSS(color,height) {
   const element = document.createElement('style')
   element.type = 'text/css'
   element.textContent = `
@@ -49,7 +49,7 @@ function injectCSS(color) {
       left: 0;
 
       width: 100%;
-      height: 2px;
+      height: ${height};
     }
 
     #nprogress .peg {
@@ -111,11 +111,11 @@ function injectCSS(color) {
 }
 
 const Progress = {
-  init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false } = {}) {
+  init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false ,height = '2px'} = {}) {
     addEventListeners(delay)
     NProgress.configure({ showSpinner })
     if (includeCSS) {
-      injectCSS(color)
+      injectCSS(color,height)
     }
   },
 }
