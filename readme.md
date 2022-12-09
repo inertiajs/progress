@@ -27,5 +27,8 @@ InertiaProgress.init({
 
   // Whether the NProgress spinner will be shown.
   showSpinner: false,
+
+  // The height of the progress bar.
+  height : '2px',
 })
 ```
