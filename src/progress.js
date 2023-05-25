@@ -1,40 +1,51 @@
-import NProgress from 'nprogress'
+import NProgress from 'nprogress';
 
-let timeout = null
+let timeout = null;
 
 function addEventListeners(delay) {
-  document.addEventListener('inertia:start', start.bind(null, delay))
-  document.addEventListener('inertia:progress', progress)
-  document.addEventListener('inertia:finish', finish)
+  document.addEventListener('inertia:start', start.bind(null, delay));
+  document.addEventListener('inertia:progress', progress);
+  document.addEventListener('inertia:finish', finish);
+  document.addEventListener('inertia:error', handleError);
 }
 
 function start(delay) {
-  timeout = setTimeout(() => NProgress.start(), delay)
+  timeout = setTimeout(() => NProgress.start(), delay);
 }
 
 function progress(event) {
   if (NProgress.isStarted() && event.detail.progress.percentage) {
-    NProgress.set(Math.max(NProgress.status, event.detail.progress.percentage / 100 * 0.9))
+    NProgress.set(
+      Math.max(NProgress.status, (event.detail.progress.percentage / 100) * 0.9)
+    );
   }
 }
 
 function finish(event) {
-  clearTimeout(timeout)
+  clearTimeout(timeout);
   if (!NProgress.isStarted()) {
-    return
+    return;
   } else if (event.detail.visit.completed) {
-    NProgress.done()
+    NProgress.done();
   } else if (event.detail.visit.interrupted) {
-    NProgress.set(0)
+    NProgress.set(0);
   } else if (event.detail.visit.cancelled) {
-    NProgress.done()
-    NProgress.remove()
+    NProgress.done();
+    NProgress.remove();
   }
+}
+function handleError(event) {
+  if (event.detail.error) {
+    customErrorHandler(event.detail.error);
+  }
+}
+function customErrorHandler(error) {
+  console.error('Progress error:', error);
 }
 
 function injectCSS(color) {
-  const element = document.createElement('style')
-  element.type = 'text/css'
+  const element = document.createElement('style');
+  element.type = 'text/css';
   element.textContent = `
     #nprogress {
       pointer-events: none;
@@ -106,18 +117,23 @@ function injectCSS(color) {
       0%   { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-  `
-  document.head.appendChild(element)
+  `;
+  document.head.appendChild(element);
 }
 
 const Progress = {
-  init({ delay = 250, color = '#29d', includeCSS = true, showSpinner = false } = {}) {
-    addEventListeners(delay)
-    NProgress.configure({ showSpinner })
+  init({
+    delay = 250,
+    color = '#29d',
+    includeCSS = true,
+    showSpinner = false,
+  } = {}) {
+    addEventListeners(delay);
+    NProgress.configure({ showSpinner });
     if (includeCSS) {
-      injectCSS(color)
+      injectCSS(color);
     }
   },
-}
+};
 
-export default Progress
+export default Progress;
